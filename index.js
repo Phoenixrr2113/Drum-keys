@@ -1,13 +1,16 @@
 for (let i = 0; i < document.querySelectorAll('.drum').length; i++) {
-	document.querySelectorAll('.drum')[i].addEventListener('click', function() {
+	document.querySelectorAll('.drum')[i].addEventListener('click', function () {
 		let buttonInnerHTML = this.innerHTML;
 
 		makeSound(buttonInnerHTML);
+
+		buttonAnimation(buttonInnerHTML);
 	});
 }
 
 document.addEventListener('keypress', event => {
 	makeSound(event.key);
+	buttonAnimation(event.key);
 });
 
 const makeSound = key => {
@@ -51,3 +54,13 @@ const makeSound = key => {
 			break;
 	}
 };
+
+const buttonAnimation = (currentKey) => {
+	let activeButton = document.querySelector('.' + currentKey);
+
+	activeButton.classList.add('pressed');
+
+	setTimeout(() => {
+		activeButton.classList.remove('pressed');
+	}, 100);
+}
